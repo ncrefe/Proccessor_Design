@@ -1,17 +1,22 @@
-# Proccessor_Desing
+# Proccessor Desing
 
-Required to extend the MIPS-lite single-cycle implementation by implementing additional status register and instructions.You will use ModelSim simulator to develop and test code. The followings need to be implemented:
-1) Sign/Negative Flag (S) - CPSR[2]: need to set the negative flag in your program status
-register whenever your arithmetic instruction results in a negative result.
-2) Overflow Flag (V) - CPSR[1]: This flag will be set if the result of a signed operation is too
-large to fit with the corresponding 32-bit architecture to use for further instructions. That is, must set to 1 of the input operands have the same sign, and the result has a different sign. For example, if the sum of two positive numbers yields a negative result, then an overflow occurs.
-3) Zero Flag (Z) - CPSR[0]: This flag has already been implemented in the MIPS-Lite. 
+Required to extend the MIPS-lite single cycle implementation by implementing additional status registers and instructions. Develop and test your code using the ModelSim simulator. You should implement the following:
 
-You must extend its usage to hold the resultant zero flag status one more cycle. The above results need to be stored in the current program status register (CPSR), which must have a size of 3 bits. The ordering must be the same as the following visualization.
+1) Sign/Minus Flag (S) - CPSR[2]:
+Program status should be flagged as negative
+If the calculation instructions lead to negative results, please register.
 
--> 3-bit Current Program Status Register.
-Also, the next instructions must execute with the knowledge of the previous instruction’s status bits. Moreover, the CPSR must be cleared or updated for each instruction-execution cycle. If the current instruction is not controlled by depending on the CPSR register (anyone of the above flags), its effect is just to update the content of the CPSR. On the other side, if the current instruction is controlled by the content of the CPSR register, architecture must clear the contents of the CPSR. Updated architecture needs to correctly execute the below instructions, some of whose 32-bit
-ISA specifications are described in Appendix A of your textbook.
+2) Overflow Flag (V) - CPSR[1]:
+This flag also affects the result of signed arithmetic.
+
+Large enough to fit in the appropriate 32-bit architecture for subsequent instructions. That is, input operands set to 1 must have the same sign, and results must have different signs. For example, overflow occurs when the sum of two positive numbers is negative. 
+
+3) Zero flag (Z) - CPSR[0]:
+This flag is already implemented in MIPS-Lite.
+
+To keep the resulting zero-flag status for another cycle, we need to extend its use. The above result should be stored in the current program status register (CPSR) which is 3 bits in size. The order should match the visualization below.
+
+3-bit current program status register. Also, the next command must recognize and execute the status bits of the previous command. Additionally, the CPSR should be cleared or updated every command execution cycle. If the current instruction is not controlled by a dependency on the CPSR register (one of the flags above), its only effect is to update the contents of the CPSR. On the other hand, if the current command is controlled by the contents of the CPSR register, the architecture should clear his CPSR. The updated architecture should correctly execute the following instructions: Some of them are 32-bit.
 
 J-format: j: whose ISA is given in Appendix A of the textbook.
 
